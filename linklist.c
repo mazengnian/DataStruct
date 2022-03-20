@@ -186,3 +186,85 @@ linklist linklist_free(linklist H){
     puts("");
     return NULL;
 }
+/***************************************************************
+* 函数名称: linklist_reverse
+* 说    明: 反转链表
+* 参    数: H：链表名
+* 返 回 值: 无
+***************************************************************/
+int linklist_reverse(linklist H){
+    linklist p;
+    linklist q;
+    if(H == NULL){
+        printf("H is NULL\n");
+        return -1;
+    }
+    if(H->next == NULL || H->next->next == NULL){
+        return 0;
+    }
+    p = H->next->next;
+    H->next->next = NULL;
+    while(p != NULL){
+        q = p;
+        p = p->next;
+        q->next = H->next;
+        H->next = q;
+    }
+    return 0;
+}
+/***************************************************************
+* 函数名称: linklist_adjacent_max
+* 说    明: 求链表中相邻两个节点的最大值
+* 参    数: H：链表名
+* 返 回 值: 第一个节点指针
+***************************************************************/
+linklist linklist_adjacent_max(linklist H, data_t *value){
+    int sum = 0;
+    int max = 0;
+    linklist p, q, r;
+    if(H == NULL ){
+        return NULL;
+    }
+    if(H->next->next->next == NULL || H->next == NULL || H->next->next == NULL){
+        return H;
+    }
+    p = H->next;
+    q = H->next->next;
+    r = p;
+    max = p->data + q->data;
+    while(q->next != NULL){
+        p = p->next;
+        q = q->next;
+        sum = p->data + q->data;
+        if(sum > max){
+            max = sum;
+            r = p;
+        }
+    }
+    *value = max;
+    return r;
+}
+/***************************************************************
+* 函数名称: linklist_merge
+* 说    明: 将两个有序链表进行合并
+* 参    数: H：链表名
+* 返 回 值: 第一个节点指针
+***************************************************************/
+int linklist_merge(linklist H1, linklist H2){
+    linklist p, q, r;
+    if(H1 == NULL || H2 == NULL){
+        printf("H1 or H2 is empty\n");
+        return -1;
+    }
+    p = H1->next;
+    q = H2->next;
+    r = p;
+    H1->next = NULL;
+    H2->next = NULL;
+    while(p && q){
+        if(p->data <= q->data){
+            
+        }
+    }
+    return 0;
+}
