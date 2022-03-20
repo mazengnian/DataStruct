@@ -10,4 +10,7 @@ int linklist_free_insert(linklist H, data_t value, int pos);
 int linklist_show(linklist H);
 int linklist_delete_pos(linklist H, int pos);
 linklist linklist_free(linklist H);
+int linklist_reverse(linklist H);
+linklist linklist_adjacent_max(linklist H, data_t *value);
+int linklist_merge(linklist H1, linklist H2);
 
