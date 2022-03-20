@@ -136,7 +136,7 @@ int linklist_free_insert(linklist H, data_t value, int pos){
 }
 /***************************************************************
 * 函数名称: linklist_delete_pos
-* 说    明: 删除链表指定位置的元素
+* 说    明: 删除链表指定位置后的元素
 * 参    数: H：链表名
            pos：位置
 * 返 回 值: 0：成功
@@ -173,7 +173,7 @@ linklist linklist_free(linklist H){
     linklist p;
     if(H == NULL){
         printf("H is invalid\n");
-        return -1;
+        return NULL;
     }
     p = H;
     printf("free\n");
@@ -248,7 +248,7 @@ linklist linklist_adjacent_max(linklist H, data_t *value){
 * 函数名称: linklist_merge
 * 说    明: 将两个有序链表进行合并
 * 参    数: H：链表名
-* 返 回 值: 第一个节点指针
+* 返 回 值: 无
 ***************************************************************/
 int linklist_merge(linklist H1, linklist H2){
     linklist p, q, r;
@@ -263,8 +263,20 @@ int linklist_merge(linklist H1, linklist H2){
     H2->next = NULL;
     while(p && q){
         if(p->data <= q->data){
-            
+            r->next = p;
+            p = p->next;
+            r = r->next;
+            r->next = NULL;
+        }else{
+            r->next = q;
+            q = q->next;
+            r = r->next;
         }
+    }
+    if(p == NULL){
+        r->next = q;
+    }else{
+        r->next = p;
     }
     return 0;
 }
